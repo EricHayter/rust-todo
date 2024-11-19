@@ -1,15 +1,21 @@
-use chrono::{self, Local, NaiveDate};
+use chrono::{self, Days, Local, NaiveDate };
 
 struct Task {
-    title: &str,
-    due_date: chrono::NaiveDate,
+    title: String,
+    due_date: NaiveDate,
     is_complete: bool,
 }
 
 impl Default for Task {
     fn default() -> Self {
-        let now = Local::now();
-        let date: NaiveDate::from_ymd(now::year)
-        Task { title: "task", due_date: chrono::NaiveDate::fr, is_complete: false }
+        let current_date = Local::now().naive_local().date();
+        let due_date = current_date.checked_add_days(Days::new(1))
+            .unwrap_or(current_date);
+
+        Task { 
+            title: "task".to_string(), 
+            due_date: due_date, 
+            is_complete: false 
+        }
     }
 }
