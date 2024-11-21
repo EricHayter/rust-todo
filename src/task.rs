@@ -1,3 +1,4 @@
+use std::fmt;
 use chrono::{self, Days, Local, NaiveDate };
 
 struct Task {
@@ -16,6 +17,16 @@ impl Default for Task {
             title: "task".to_string(), 
             due_date: due_date, 
             is_complete: false 
+        }
+    }
+}
+
+// [Due Date] Title [X] or [ ]
+impl fmt::Display for Task {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self.is_complete {
+            true => write!(f, "[{}] {}, [X]", self.due_date, self.title),
+            false => write!(f, "[{}] {}, [ ]", self.due_date, self.title)
         }
     }
 }
