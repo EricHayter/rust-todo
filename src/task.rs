@@ -1,6 +1,6 @@
 use std::fmt;
 
-use chrono::{ Local, NaiveDate };
+use chrono::{Local, NaiveDate};
 
 pub struct Task {
     title: String,
@@ -22,10 +22,10 @@ impl Task {
 impl Default for Task {
     fn default() -> Self {
         let current_date = Local::now().naive_local().date();
-        Task { 
-            title: "task".to_string(), 
-            creation_date: current_date, 
-            is_complete: false 
+        Task {
+            title: "task".to_string(),
+            creation_date: current_date,
+            is_complete: false,
         }
     }
 }
@@ -35,7 +35,7 @@ impl fmt::Display for Task {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self.is_complete {
             true => write!(f, "[{}] {} [X]", self.creation_date, self.title),
-            false => write!(f, "[{}] {} [ ]", self.creation_date, self.title)
+            false => write!(f, "[{}] {} [ ]", self.creation_date, self.title),
         }
     }
 }
